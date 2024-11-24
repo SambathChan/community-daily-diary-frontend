@@ -1,30 +1,13 @@
-# React + TypeScript + Vite
+# Community Daily Diary (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About this project
 
-Currently, two official plugins are available:
+The application displays daily diary posts from users one day at a time.
+The application provide ways to browse previous days (history) with two navigation buttons, one for the previous day, and another for the upcoming day. The upcoming day button will deactivate is the current posts are for today.
+Any user can contribute and submit a diary post.
+A diary post consists of a title, and body.
+A diary posts can be voted-up or voted-down by users.
+Users may up-vote or down-vote a post multiple times.
+Daily diary posts sorted by vote in descending order.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+https://communitydailydiary.netlify.app/
