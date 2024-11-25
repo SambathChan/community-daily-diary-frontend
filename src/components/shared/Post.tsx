@@ -1,15 +1,16 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { Button } from "../ui/button";
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "../ui/card";
-import { Link } from "react-router-dom";
-import { getDateDifferenceFromNow } from "../../lib/date.utils";
-import { IPost } from "../../models";
-import { format } from "date-fns";
 import { useContext, useState } from "react";
-import { GlobalContext } from "../../AppContext";
-import { voteSinglePost } from "../../services/postService";
+
 import Autolinker from 'autolinker';
+import { Button } from "../ui/button";
 import DOMPurify from 'dompurify';
+import { GlobalContext } from "../../AppContext";
+import { IPost } from "../../models";
+import { Link } from "react-router-dom";
+import { format } from "date-fns";
+import { getDateDifferenceFromNow } from "../../lib/date.utils";
+import { voteSinglePost } from "../../services/postService";
 
 export type PostProps = {
   post: IPost;
@@ -17,7 +18,7 @@ export type PostProps = {
 };
 
 function Post({ post, single }: PostProps) {
-  const { title, body, vote, createdAt, uuid } = post;
+  const { title, body, vote, createdAt, _id } = post;
   const { posts, updatePosts, updatePost } = useContext(GlobalContext);
 
   const [downVoteTrigger, setDownVoteTrigger] = useState(false);
@@ -25,9 +26,9 @@ function Post({ post, single }: PostProps) {
   const [voting, setVoting] = useState(false);
 
   const handleVoteUp = async () => {
-    if (createdAt && uuid) {
+    if (createdAt && _id) {
       setVoting(prev => !prev);
-      const votes = await voteSinglePost(createdAt, uuid, true);
+      const votes = await voteSinglePost(createdAt, _id, true);
       updateVote(votes);
       if (!upVoteTrigger) {
         setUpVoteTrigger(() => true);
@@ -38,10 +39,10 @@ function Post({ post, single }: PostProps) {
   };
 
   const handleVoteDown = async () => {
-    if (createdAt && uuid) {
+    if (createdAt && _id) {
       setVoting(prev => !prev);
       setVoting(true);
-      const votes = await voteSinglePost(createdAt, uuid, false);
+      const votes = await voteSinglePost(createdAt, _id, false);
       updateVote(votes);
       if (!downVoteTrigger) {
         setDownVoteTrigger(() => true);
@@ -57,7 +58,7 @@ function Post({ post, single }: PostProps) {
     } else {
       updatePosts(
         posts.map((p) => {
-          if (p.uuid === uuid) {
+          if (p._id === _id) {
             return { ...p, vote: votes };
           }
           return p;
@@ -75,7 +76,7 @@ function Post({ post, single }: PostProps) {
       <CardHeader>
         <CardTitle className="leading-8">{title}</CardTitle>
         <CardDescription>
-          <Link to={`/posts/${format(createdAt!, 'MM-dd-yyyy')}/${uuid}`}>{getDateDifferenceFromNow(createdAt!)}</Link>
+          <Link to={`/posts/${format(createdAt!, 'MM-dd-yyyy')}/${_id}`}>{getDateDifferenceFromNow(createdAt!)}</Link>
         </CardDescription>
       </CardHeader>
       <CardContent className="flex gap-4">

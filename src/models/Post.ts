@@ -1,5 +1,5 @@
 export interface IPost {
-  uuid?: string;
+  _id?: string;
   title: string;
   body: string;
   vote?: number;
