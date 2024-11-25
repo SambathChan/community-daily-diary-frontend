@@ -1,5 +1,4 @@
-
-import { differenceInMinutes, differenceInHours, differenceInDays, startOfToday, parse } from "date-fns";
+import { differenceInDays, differenceInHours, differenceInMinutes, parse, startOfToday } from "date-fns";
 
 export const getDateDifferenceFromNow = (date: Date) => {
   const currentDate = new Date();
@@ -16,7 +15,7 @@ export const getDateDifferenceFromNow = (date: Date) => {
   } else if (days < 7) {
     return `${days}d ago`;
   } else {
-    return date.toLocaleDateString();
+    return (new Date(date)).toLocaleDateString();
   }
 };
 
