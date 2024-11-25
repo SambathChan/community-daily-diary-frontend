@@ -1,12 +1,13 @@
-import { Button } from "@/components/ui/button";
 import { DatePicker, Posts } from "./shared";
-import { useContext, useEffect } from "react";
-import { getPosts } from "../services/postService";
 import { addDays, format, isEqual, startOfToday, subDays } from "date-fns";
+import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { parseDate } from "../lib/date.utils";
+
+import { Button } from "@/components/ui/button";
 import { GlobalContext } from "../AppContext";
 import { SkeletonCard } from "./shared/SkeletonCard";
+import { getPosts } from "../services/postService";
+import { parseDate } from "../lib/date.utils";
 
 function Home() {
   const { date = format(startOfToday(), 'MM-dd-yyyy') } = useParams<{ date: string; }>();
@@ -21,7 +22,9 @@ function Home() {
       const posts = await getPosts(date);
       updatePosts(posts);
       updateLoading(false);
-    })();
+    })().catch((error) => {
+      console.error(error);
+    });
   }, [date]);
 
   const handleNextDay = () => {

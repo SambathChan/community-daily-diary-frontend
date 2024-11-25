@@ -10,7 +10,7 @@ function ViewPost() {
   const { post, loading, updateLoading, updatePost } = useContext(GlobalContext);
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       if (date && id) {
         updateLoading(true);
 

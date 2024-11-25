@@ -1,9 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "./ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import {
   Form,
   FormControl,
@@ -13,14 +8,19 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Textarea, TextareaProps } from "./ui/textarea";
 import { Input, InputProps } from "./ui/input";
+import { Textarea, TextareaProps } from "./ui/textarea";
+import { useContext, useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { GlobalContext } from "@/AppContext";
 import { IPost } from "../models";
 import { createPost } from "../services/postService";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "./ui/use-toast";
-import { useContext, useState } from "react";
-import { GlobalContext } from "@/AppContext";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const FormSchema = z.object({
   title: z.string().min(5, {
@@ -47,7 +47,7 @@ function CreatePost() {
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+  const onSubmit = async (data: z.infer<typeof FormSchema>): Promise<void> => {
     const postData: IPost = { ...data };
     // Change to controlled component data
     postData.title = title;
