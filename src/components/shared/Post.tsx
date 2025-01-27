@@ -8,7 +8,6 @@ import DOMPurify from 'dompurify';
 import { GlobalContext } from "../../AppContext";
 import { IPost } from "../../models";
 import { Link } from "react-router-dom";
-import { format } from "date-fns";
 import { getDateDifferenceFromNow } from "../../lib/date.utils";
 import { voteSinglePost } from "../../services/postService";
 
