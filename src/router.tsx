@@ -16,8 +16,8 @@ const router = createBrowserRouter([
         element: <Home />, //by date
       },
       {
-        path: "posts/:date/:id",
-        element: <ViewPost />, //by date and id
+        path: "post/:id",
+        element: <ViewPost />, //by id
       },
       {
         path: "posts/create",

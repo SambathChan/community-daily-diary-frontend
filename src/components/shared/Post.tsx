@@ -26,9 +26,9 @@ function Post({ post, single }: PostProps) {
   const [voting, setVoting] = useState(false);
 
   const handleVoteUp = async () => {
-    if (createdAt && _id) {
+    if (_id) {
       setVoting(prev => !prev);
-      const votes = await voteSinglePost(createdAt, _id, true);
+      const votes = await voteSinglePost(_id, true);
       updateVote(votes);
       if (!upVoteTrigger) {
         setUpVoteTrigger(() => true);
@@ -39,10 +39,10 @@ function Post({ post, single }: PostProps) {
   };
 
   const handleVoteDown = async () => {
-    if (createdAt && _id) {
+    if (_id) {
       setVoting(prev => !prev);
       setVoting(true);
-      const votes = await voteSinglePost(createdAt, _id, false);
+      const votes = await voteSinglePost(_id, false);
       updateVote(votes);
       if (!downVoteTrigger) {
         setDownVoteTrigger(() => true);
@@ -76,7 +76,7 @@ function Post({ post, single }: PostProps) {
       <CardHeader>
         <CardTitle className="leading-8">{title}</CardTitle>
         <CardDescription>
-          <Link to={`/posts/${format(createdAt!, 'MM-dd-yyyy')}/${_id}`}>{getDateDifferenceFromNow(createdAt!)}</Link>
+          <Link to={`/post/${_id}`}>{getDateDifferenceFromNow(createdAt!)}</Link>
         </CardDescription>
       </CardHeader>
       <CardContent className="flex gap-4">

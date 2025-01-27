@@ -6,15 +6,15 @@ import { GlobalContext } from "../AppContext";
 import { SkeletonCard } from "./shared/SkeletonCard";
 
 function ViewPost() {
-  const { date, id } = useParams<{ date: string, id: string; }>();
+  const { id } = useParams<{ id: string; }>();
   const { post, loading, updateLoading, updatePost } = useContext(GlobalContext);
 
   useEffect(() => {
     void (async () => {
-      if (date && id) {
+      if (id) {
         updateLoading(true);
 
-        const data = await getSinglePost(date, id);
+        const data = await getSinglePost(id);
 
         if (data) {
           updatePost(data);
