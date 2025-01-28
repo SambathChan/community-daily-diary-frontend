@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 
 import { IPost } from "../models";
 import { axiosConfig } from "@/config";
+import { parse } from "date-fns";
 
 const { VITE_API_URL } = import.meta.env;
 const BASE_URL = `${VITE_API_URL}/posts`;
@@ -17,9 +18,10 @@ export const createPost = async (post: IPost): Promise<IPost | undefined> => {
   }
 };
 
-export const getPosts = async (date: string): Promise<IPost[]> => {
+export const getPosts = async (dateString: string): Promise<IPost[]> => {
   try {
-    const response = await axios.get<IPost[]>(`${BASE_URL}?date=${date}`);
+    const date = parse(dateString, 'MM-dd-yyyy', new Date());
+    const response = await axios.get<IPost[]>(`${BASE_URL}?date=${date.toISOString()}`);
     return response.data;
   } catch (error) {
     return [];
