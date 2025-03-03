@@ -13,3 +13,6 @@
 ## Demo
 
 https://communitydailydiary.netlify.app/
+
+## Angular Version
+https://communitydailydiary-ng.netlify.app/
