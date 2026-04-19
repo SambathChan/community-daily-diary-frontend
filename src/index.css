@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.js";
 
 @layer base {
 	:root {
@@ -86,7 +85,7 @@ h4 {
 }
 
 p {
-	@apply leading-7 [&:not(:first-child)]:mt-6;
+	@apply leading-7;
 }
 
 ul {
